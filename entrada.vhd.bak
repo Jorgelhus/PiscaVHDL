@@ -1,0 +1,43 @@
+entity entrada is
+port (
+signal sw : in bit_vector (17 downto 0);
+signal estado : in bit_vector (3 downto 0);
+signal key3 : in bit;
+signal pwm1 : in bit;
+signal ledg : out bit_vector (17 downto 0);
+signal bit_in : out bit
+);
+end entity entrada;
+
+architecture c_entrada of entrada is 
+
+variable registro : bit_vector (17 downto 0);
+
+begin
+
+ent: process(pwm1)
+
+begin
+
+if pwm1='0' and pwm1'event then
+
+if estado="0000" then
+
+if key3='0' then
+	registro := sw;
+end if;
+
+else
+
+registro := shift_right(registro, 1); -- verificar comando para deslocar a direita com entrada de zero.
+
+end if;
+
+end if;
+
+ledg <= registro;
+
+end process ent;
+
+
+end architecture c_entrada;

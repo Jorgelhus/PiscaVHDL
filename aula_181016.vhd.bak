@@ -1,0 +1,15 @@
+entity aula_181016 is
+port (
+
+);
+end entity aula_181016;
+
+
+architecture c_aula_181016 of aula_181016 is
+
+
+begin
+
+
+
+end architecture c_aula_181016;

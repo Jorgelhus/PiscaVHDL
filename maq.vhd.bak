@@ -1,0 +1,120 @@
+entity maq is
+port (
+
+signal dado, reset, clk : in bit;
+signal alm : out bit;
+signal estado : out bit_vector (2 downto 0)
+
+);
+
+end entity;
+
+architecture c_maq of maq is 
+
+signal estado2 : bit_vector (2 downto 0):= "000";
+signal alm2 : bit := '0';
+begin
+
+estado <= estado2;
+alm <= alm2;
+
+maq: process(clk)
+
+begin
+
+if clk='0' and clk'event then 
+
+
+if reset='1' then 
+
+estado2 <= "000";
+alm2<='0';
+
+ else
+
+ case estado2 is 
+	when "000" =>
+	   if dado ='0' then 
+		     estado2<="000";
+		     alm2 <= '0';
+		  else 
+		     estado2<= "001";
+		     alm2<= '0';		 
+		  end if;
+ 
+ when "001" =>
+	   if dado ='0' then 
+		     estado2<="010";
+		     alm2 <= '0';
+		  else 
+		     estado2<= "001";
+		     alm2<= '0';		 
+		  end if;
+
+when "010" =>
+	   if dado ='0' then 
+		     estado2<="011";
+		     alm2 <= '0';
+		  else 
+		     estado2<= "001";
+		     alm2<= '0';		 
+		  end if;
+		  
+		  
+when "011" =>
+	   if dado ='0' then 
+		     estado2<="000";
+		     alm2 <= '0';
+		  else 
+		     estado2<= "100";
+		     alm2<= '0';		 
+		  end if; 
+		  
+when "100" =>
+	   if dado ='0' then 
+		     estado2<="010";
+		     alm2 <= '0';
+		  else 
+		     estado2<= "101";
+		     alm2<= '1';		 
+		  end if;
+		  
+when "101" =>
+	   if dado ='0' then 
+		     estado2<="110";
+		     alm2 <= '1';
+		  else 
+		     estado2<= "101";
+		     alm2<= '1';		 
+		  end if;
+		  
+when "110" =>
+	   if dado ='0' then 
+		     estado2<="111";
+		     alm2 <= '1';
+		  else 
+		     estado2<= "101";
+		     alm2<= '1';		 
+		  end if;
+
+when "111" =>
+	   if dado ='0' then 
+		     estado2<="000";
+		     alm2 <= '0';
+		  else 
+		     estado2<= "101";
+		     alm2<= '1';		 
+		  end if;
+ 
+  
+ 
+ 
+ end case;
+
+end if;
+end if;
+
+end process maq;
+
+
+end architecture;
